@@ -2,6 +2,8 @@
 _Erin Cameron_
 
 ## Introduction
+What is a Recursive Descent Parser? A recursive descent parser has a subprogram for each nonterminal in its grammar. Many of these subprograms are recursive - hence the name - and produces a parse tree in top-down nature.
+
 In this application, I have created a program to analyze the syntax of input programs for a hypothetical imperative programming language. The Extended Backus-Naur Form (EBNF) grammar for this imperative programming language is below:
 ```
 <program> -> program begin <statement_list> end
@@ -12,7 +14,7 @@ In this application, I have created a program to analyze the syntax of input pro
 
 <assignment_statement> -> <variable> = <expression>
 
-<variable> -> identifier (An identifier is a string that begins with a letter followed by 0 or more letters and/or digits)
+<variable> -> identifier
 
 <expression> -> <term> { (+|-) <term>}
 
@@ -22,17 +24,56 @@ In this application, I have created a program to analyze the syntax of input pro
 
 <if_statement> -> if (<logic_expression>) then <statement>
 
-<logic_expression> -> <variable> (< | >) <variable> (Assume that logic expressions have only less than or greater than operators)
+<logic_expression> -> <variable> (< | >) <variable>
 
 <loop_statement> -> loop (<logic_expression>) <statement>
 ```
 
-The program reads in an input test `.txt` file and determines whether or not the file contains syntax errors.   
+Where:
+* Separators:
+    * `|` --> OR
+    * `{}` --> optional statement with zero or more repetitions
+    * `()` --> encapsulates an OR selection
+    * `;` --> statement terminator
+* Keywords:
+    * `program`
+    * `begin`
+    * `end`
+    * `if`
+    * `then`
+    * `loop`
+* Operators:
+    * `+` --> Addition
+    * `-` --> Subtraction
+    * `*` --> Multiplication
+    * `/` --> Division
+    * `>` --> Greater than
+    * `<` --> Less than
+        * In this grammar, there are only two logic expressions `>` and `<`.
+* Identifiers:
+    * A string value that begins with a letter followed by 0 or more letters and/or digits
+
+The nonterminal symbols include:
+* `<program>`
+* `<statement_list>`
+* `<statement>`
+* `<assignment_statement>`
+* `<variable>`
+* `<if_statement>`
+* `<loop_statement>`
+* `<expression>`
+* `<logic_expression>`
+* `<term>`
+* `<factor>`
+* `<expr>`
+
+The program reads in an input test `.txt` file and determines whether or not the file contains syntax errors.
 
 
 ## Tools & Techniques
 * Java
 * Eclipse IDE
+
 
 ## Implementation
 The implementation of the program follows the two steps below:
@@ -50,7 +91,7 @@ The following test case files have been included:
 * `SemicolonMissing.txt` --> The syntax error in this test file is a missing semicolon at the end of line 4.
 
 
-## Execution
+## Run
 To execute the program, follow the instructions below:
 1. Clone the git repo: `https://github.com/erincameron11/recursive-descent-parser`
 2. Open up the files as a Java project in the IDE of your choice.
